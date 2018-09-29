@@ -2,7 +2,7 @@ var http = require('http'),
 fs = require('fs');
 
 
-fs.readFile('./galery.html', function (err, html) {
+fs.readFile('./three.html', function (err, html) {
   if (err) {
     throw err; 
   }       
