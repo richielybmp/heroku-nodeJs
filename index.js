@@ -11,5 +11,5 @@ fs.readFile('./three.html', function (err, html) {
     response.writeHeader(200, {"Content-Type": "text/html"});  
     response.write(html);  
     response.end();  
-  }).listen(8000);
+  }).listen(process.env.PORT || 8000);
 });
