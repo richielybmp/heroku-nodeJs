@@ -1,15 +1,22 @@
-var http = require('http'),
-fs = require('fs');
+var express = require('express')
+const router = express.Router();
+var app = express()
 
+app.set('port', (process.env.PORT || 8000))
+app.listen(app.get('port'))
 
-fs.readFile('./three.html', function (err, html) {
-  if (err) {
-    throw err; 
-  }       
+app.set('view engine', 'html');
 
-  http.createServer(function(request, response) {  
-    response.writeHeader(200, {"Content-Type": "text/html"});  
-    response.write(html);  
-    response.end();  
-  }).listen(process.env.PORT || 8000);
+// por padrão o express irá procurar artefatos estáticos nesse diretório 'public'
+// pode ser qualquer nome, é necessário existir no sistema de diretórios.
+app.use(express.static('public'));
+
+// Display the dashboard page
+router.get("/", (req, res) => {
+  // todos os links para css e js dentro do html serão carregados
+  res.sendFile("galery.html", { root: __dirname });
 });
+
+app.use("/", router);
+
+
